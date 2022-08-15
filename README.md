@@ -1,6 +1,6 @@
 # Description
 
-API documentation for UAM - Enlorment ( Signup & Verification ) Service main API
+API documentation for UAM - Enlorment ( Signup & Verification ) microservice 
 
 
 ## Installation
@@ -23,15 +23,41 @@ PASSWORD = XXXXXXXXXXXXXXX
 
 ## Quick find
 
+### Welcome
+
+- [Welcome Route](#1)
+
 ### SignUp
 
-- [User Sign In ](#1)
+- [User Sign Up](#2)
 
+### Verify Account
+
+- [Account verification](#3)
 
 ## Endpoints
 
+### 1. Welcome ~ ( GET Request )
 
-### 1. Sign Up ~ ( POST Request )
+Endpoint
+
+```text
+/
+```
+
+Body : None
+
+Response:
+
+```json
+{
+  "status": 200,
+  "message": "Welcome to enrollment microservice",
+}
+```
+
+
+### 2. Sign Up ~ ( POST Request )
 
 Endpoint
 
@@ -59,10 +85,40 @@ Response:
 
 ```json
 {
-  "statusCode": 201,
+  "status": 201,
   "message": "Signup successfully!",
   "data": { 
     "token":"bckejfhoaslkcnrvnksdbzxv...etc"
     }
+}
+```
+
+
+### 3. Account Verification ~ ( POST Request )
+
+Endpoint
+
+```text
+/verify-account
+```
+
+Headers:
+```
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdG9waGVrd2l6ZXJhQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMDc4NDgyNDI5NSIsImlhdCI6MTY2MDQ5OTI0MH0.u41lfhFl4VNU2Uz-SuMFjK-GWNbdeH8dkS1mhbsrwPI
+```
+
+Body:
+```json
+  "code" : 123
+```
+
+Response:
+
+```json
+{
+  "status": 200,
+  "message": "Account verified successfully!",
 }
 ```

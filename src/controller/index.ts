@@ -14,7 +14,7 @@ export default class Auth {
 
     static WelcomeApi = (_:Request, res: Response) => {
         //
-        return SuccessResponse(res,200,'Welcome to UAM Backend')
+        return SuccessResponse(res,200,'Welcome to enrollment microservice')
     }
 
     static Signup = async (req:Request,res:Response) =>{
