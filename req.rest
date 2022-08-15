@@ -1,0 +1,76 @@
+GET http://localhost:2000 
+# irembo.com/getone
+
+###
+GET http://localhost:2000/users
+
+###
+POST http://localhost:2000/signin
+
+###
+POST http://localhost:2000/signup
+Accept: application/json
+Content-Type: application/json
+
+{
+    "profilePhoto": "https://picsum.photos/200/300",
+    "name": "Christopher Kwizera",
+    "email": "christophekwizera@gmail.com",
+    "password": "kamunikwi",
+    "gender": "Male",
+    "age": "20",
+    "national_id": "1199980015433063",
+    "phoneNumber": "0784824295",
+    "document": "https://picsum.photos/200/300",
+    "dateOfBirth": "1999-03-08",
+    "maritalStatus": "SINGLE",
+    "nationality": "Rwandan"
+}
+
+###
+POST http://localhost:2000/signin
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "christophekwizera@gmail.com",
+    "password": "zxcvbnm"
+}
+
+###
+POST http://localhost:2000/reset-password
+Accept: application/json
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNocmlzdG9waGVrd2l6ZXJhQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMDc4NDgyNDI5NSIsImlhdCI6MTY2MDQ5OTI0MH0.u41lfhFl4VNU2Uz-SuMFjK-GWNbdeH8dkS1mhbsrwPI
+
+{
+    "password": "zxcvbnm"
+}
+
+###
+POST http://localhost:2000/forgot-password
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "christophekwizera@gmail.com"
+}
+
+
+###
+POST http://localhost:2000/get-signed-urls
+Accept: application/json
+Content-Type: application/json
+
+{
+    "key": "31a85cc2-75cb-4df1-8869-d9f9acff7a3d.jpg"
+}
+
+###
+POST http://localhost:2000/create-signed-urls
+Accept: application/json
+Content-Type: application/json
+
+{
+    "type": "image/jpg"
+}
