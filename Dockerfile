@@ -1,15 +1,17 @@
-FROM node:12
+FROM node
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN yarn
+RUN npm install
 
 COPY . .
 
-ENV PORT = 8080
+RUN npm run build
+COPY .env ./dist/
+WORKDIR ./dist
 
-EXPOSE 8080
+EXPOSE 4321
 
-CMD [ "yarn","start" ]
+CMD node index.js
