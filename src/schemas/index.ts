@@ -15,7 +15,7 @@ export const SignUp = Joi.object({
     age: Joi.string().required(),
     national_id: Joi.string().required(),
     phoneNumber: Joi.string().required(),
-    document: Joi.string().required(),
+    document: Joi.string(),
     dateOfBirth: Joi.string().required(),
     name: Joi.string().pattern(/^[a-zA-Z0-9 *]{3,25}$/).required(),
     maritalStatus: Joi.string().valid(...enumToArray(MaritalStatus)).required(),

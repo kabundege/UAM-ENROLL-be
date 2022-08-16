@@ -20,9 +20,18 @@ export default class Auth {
     static Signup = async (req:Request,res:Response) =>{
 
         try{
+
+            /** check if user already exist */
+            const { email,password } = req.body
+
+            const exists = await User.findOne({ email }).exec()
+   
+            if(exists){
+                return ErrorResponse(res,409,'User Already Exists')
+            }
             
             // Part 1.
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+            const hashedPassword = await bcrypt.hash(password, 10);
 
             const userPayload = new User({
                 ...req.body,
@@ -34,7 +43,7 @@ export default class Auth {
 
             /** Save a new User */
             const user = await userPayload.save() 
-            const { phoneNumber,email,_id:userId } = user
+            const { phoneNumber,_id:userId } = user
 
             // Part 2 ~ Confirm Account Creation
             const min = 100000,max=999999;

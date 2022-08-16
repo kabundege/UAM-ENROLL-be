@@ -11,7 +11,7 @@ const UserSchema:Schema = new Schema(
         age: { type:String, required:true },
         national_id: { type:String, required:true },
         phoneNumber: { type:String, required:true },
-        document: { type:String, required:true },
+        document: { type:String, required:false },
         status: { type: String, required:false },
         hasTwoFactorAuth: { type:Boolean,required:false },
         dateOfBirth: { type:String, required:true },
