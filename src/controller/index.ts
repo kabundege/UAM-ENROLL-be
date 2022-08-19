@@ -70,12 +70,11 @@ export default class Auth {
 
             /** save the code & associate with user by id */
             const codePayload = new Code({ userId,code })
-            const newCode = await codePayload.save()
+            await codePayload.save()
 
             const token = jwt.sign({ email, phoneNumber },process.env.JWT_SECRET)
 
             return SuccessResponse(res,201,'Signup Successful', { token,user })
-
         }catch(error){
             return ErrorResponse(res,500,error)
         }
@@ -96,9 +95,9 @@ export default class Auth {
             (await Code.findById(exists._id)).delete().exec()
 
             /** Verify email */
-            const user = await User.findOne({ email:req.userData.email }).update({ status: AccountStatus.PENDING_VERIFICATION }).exec()
+            const user = await User.findOne({ email:req.userData.email }).update({ status: AccountStatus.PENDING_VERIFICATION.toString() }).exec()
    
-            return SuccessResponse(res,200,'Reset Successful',user)
+            return SuccessResponse(res,200,'Verification Successful',user)
 
         }catch(error){
             return ErrorResponse(res,500,error)

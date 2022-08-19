@@ -5,9 +5,7 @@ const user = process.env.EMAIL
 const pass = process.env.PASSWORD
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    host: 'smtp.outlook.com',
     auth: { user, pass }
 });
 
@@ -20,10 +18,12 @@ export const SendEmail = async (to:string,subject:string,html:string) => {
         html// plain text body
     };
   
-    return transporter.sendMail(mailOptions, function (err, info) {
-        if(err)
-        logging.error('NodeMailer', err.message, err)
-        else
-        logging.info('NodeMailer', info.response, info)
-    });
+    return new Promise((res,rej)=>{
+        transporter.sendMail(mailOptions, function (err, info) {
+            if(err)
+            rej(logging.error('NodeMailer', err.message, err))
+            else
+            res(logging.info('NodeMailer', info.response, info))
+        });
+    }) 
 }

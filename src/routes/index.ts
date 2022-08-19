@@ -12,7 +12,7 @@ const {
 /** User APIs */
 route.get('/', Controller.WelcomeApi)
 route.post('/signup', SignUpValidation, Controller.Signup)
-route.get('/verify-account', AuthCheck, CodeValidation, Controller.Verification)
+route.post('/verify-account', AuthCheck, CodeValidation, Controller.Verification)
 
 
 export default route

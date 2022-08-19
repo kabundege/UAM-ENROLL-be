@@ -8,20 +8,20 @@ GET http://localhost:2000/users
 POST http://localhost:2000/signin
 
 ###
-POST http://localhost:2000/signup
+POST http://localhost:1000/signup
 Accept: application/json
 Content-Type: application/json
 
 {
-    "profilePhoto": "https://picsum.photos/200/300",
+    "profilePhoto": "bff7f218-058f-4d75-bd12-650e2570e191.jpg",
     "name": "Christopher Kwizera",
-    "email": "christophekwizera@gmail.com",
-    "password": "kamunikwi",
+    "email": "christophekwizera1@gmail.com",
+    "password": "zxcvbnm",
     "gender": "Male",
     "age": "20",
     "national_id": "1199980015433063",
     "phoneNumber": "0784824295",
-    "document": "https://picsum.photos/200/300",
+    "document": "bff7f218-058f-4d75-bd12-650e2570e191.jpg",
     "dateOfBirth": "1999-03-08",
     "maritalStatus": "SINGLE",
     "nationality": "Rwandan"
