@@ -9,6 +9,10 @@ import { AuthInfoRequest } from '../../types';
 export const AuthCheck = async (req:AuthInfoRequest, res:Response, next:NextFunction) => {
   try {
     const token = req.header("Authorization");
+    
+    if(!token)
+    return ErrorResponse(res, 401,'Provide a token')
+
     const { email } = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET) as  { email:string }
     
     const user = await User.findOne({ email }).exec()

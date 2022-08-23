@@ -8,7 +8,7 @@ import bcrypt from 'bcryptjs';
 import { SendEmail } from '../helpers/mailer';
 import Code from '../Models/Code';
 
-enum AccountStatus { UNVERIFIED, PENDING_VERIFICATION, VERIFIED }
+enum AccountStatus { UNVERIFIED, PENDING, VERIFICATION, VERIFIED }
 
 export default class Auth {
 
@@ -74,7 +74,7 @@ export default class Auth {
 
             const token = jwt.sign({ email, phoneNumber },process.env.JWT_SECRET)
 
-            return SuccessResponse(res,201,'Signup Successful', { token,user })
+            return SuccessResponse(res,201,'Signup Successful', { token })
         }catch(error){
             return ErrorResponse(res,500,error)
         }
@@ -90,15 +90,14 @@ export default class Auth {
             if(!exists || exists.code !== req.body.code){
                 return ErrorResponse(res,400,"Invalid Code")
             }
-
             /** Delete the existing code from the db */
-            (await Code.findById(exists._id)).delete().exec()
-
+            await Code.deleteOne({ userId:req.userData._id }).exec()
             /** Verify email */
-            const user = await User.findOne({ email:req.userData.email }).update({ status: AccountStatus.PENDING_VERIFICATION.toString() }).exec()
-   
-            return SuccessResponse(res,200,'Verification Successful',user)
+            await User.updateOne({ _id:req.userData._id },{ status: AccountStatus.VERIFIED.toString() }).exec()
 
+            const user  = await User.findOne({ email:req.userData.email }).exec()
+
+            return SuccessResponse(res,200,'Verification Successful',{ user })
         }catch(error){
             return ErrorResponse(res,500,error)
         }

@@ -17,7 +17,7 @@ mongoose.connect(MONGO.url, MONGO.options)
     logging.error(NAMESPACE, error.message, error);
 });
 
-const NAMESPACE = 'Server';
+const NAMESPACE = 'Enrollment-Server';
 const app: Application = express();
 
 /** Cors Setup */
@@ -37,19 +37,6 @@ app.use((req, res, next) => {
         logging.info(NAMESPACE, `METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
     })
     
-    next();
-});
-
-/** Rules of our API */
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-    if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-
     next();
 });
 
